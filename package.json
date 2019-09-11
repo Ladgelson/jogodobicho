@@ -1,0 +1,19 @@
+{
+  "name": "jogodobicho",
+  "version": "1.0.0",
+  "description": "Sistema de gerenciamento de apostas de usuário no jogo do bicho.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ladgelson/jogodobicho.git"
+  },
+  "author": "Micaías L. and Fabricio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ladgelson/jogodobicho/issues"
+  },
+  "homepage": "https://github.com/Ladgelson/jogodobicho#readme"
+}
