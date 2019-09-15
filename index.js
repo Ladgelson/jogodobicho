@@ -16,5 +16,5 @@ const indexRouter = require('./routes/indexRoute');
 app.use('/',indexRouter);
 
 app.listen(PORT, () => {
-    console.log('Servidor rodando...');
+    console.log('Servidor rodando...', PORT);
 });
