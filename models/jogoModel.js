@@ -1,35 +1,9 @@
 const mongoose = require('mongoose');
 
 const jogoSchema = new mongoose.Schema({
-    login:String,
-    senha:String,
-    users: [{
-        nome: String,
-        login: String,
-        senha: String,
-        saldo: Number,
-        cambista: {
-            ehcambista: Boolean,
-            porcentagem: Number,
-        },
-        apostas: [{
-            tipo: Number,
-            datahora: Date,
-            aposta: [{
-                posicao: Number,
-                valor: Number,
-                tipoDeAposta: Number,
-            }]
-        }],
-        extracoes: [{
-            periodo: Number,
-            datahora: Date,
-            resultados: [{
-                bicho: Number,
-                num: Number
-            }]
-        }]
-    }]
+    users: [{type: Schema.Types.ObjectId, ref: 'userSchema'}],
+    extracoes: [{type: Schema.Types.ObjectId, ref: 'extracoesSchema'}]
 })
 
-module.exports = mongoose.model('jogo',jogoSchema)
+const jogo = mongoose.model('jogoSchema', jogoSchema);
+module.exports(jogo)
