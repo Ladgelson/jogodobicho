@@ -37,6 +37,11 @@ router.delete('/:id', getJogo , async (req,res)=>{
     }
 })
 
+// UPDATE
+router.patch('/:id', getJogo, (req,res)=> {
+    
+})
+
 async function getJogo(req, res, next){
     let j
     try{

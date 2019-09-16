@@ -7,4 +7,4 @@ const resultadoSchema = new mongoose.Schema({
 })
 
 const resultado = mongoose.model('resultadoSchema', resultadoSchema)
-module.exports(resultado)
+module.exports = resultado 

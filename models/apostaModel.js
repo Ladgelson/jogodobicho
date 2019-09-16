@@ -8,4 +8,4 @@ const apostaSchema = new mongoose.Schema({
 })
 
 const aposta = mongoose.model('apostaSchema', apostaSchema);
-module.exports(aposta)
+module.exports = aposta 

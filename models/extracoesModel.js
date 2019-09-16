@@ -8,4 +8,4 @@ const extracaoSchema = new mongoose.Schema({
 })
 
 const extracao = mongoose.model('extracaoSchema', extracaoSchema)
-module.exports(extracao)
+module.exports = extracao

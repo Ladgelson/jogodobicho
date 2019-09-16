@@ -7,4 +7,4 @@ const apostasSchema = new mongoose.Schema({
     apostas: [{ type: Schema.Types.ObjectId, ref: 'apostaSchema'}]
 })
 const apostas = mongoose.model('apostasSchema', apostasSchema)
-module.exports(apostas)
+module.exports = apostas

@@ -15,6 +15,9 @@ app.use(express.json());
 const indexRouter = require('./routes/indexRoute');
 app.use('/',indexRouter);
 
+const userRoute = require('./routes/userRoute');
+app.use('/users', userRoute);
+
 app.listen(PORT, () => {
     console.log('Servidor rodando...', PORT);
 });
