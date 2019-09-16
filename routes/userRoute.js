@@ -15,7 +15,14 @@ router.get('/', async (req,res)=>{
 // POST
 router.post('/', async (req,res)=>{
     const u = new user({
-        jogo: "5d7ef18aa0ba9b33582b9e08"
+        jogo: req.body.jogo,
+        nome: req.body.nome,
+        login: req.body.login,
+        senha: req.body.senha,
+        saldo: req.body.saldo,
+        adm: req.body.adm,
+        cambista: req.body.cambista,
+        apostas: []
     })
     console.log(u)
     try{
@@ -27,14 +34,14 @@ router.post('/', async (req,res)=>{
 })
 
 // DELETE 
-// router.delete('/:id', getJogo , async (req,res)=>{
-//     try {
-//         await res.j.remove()
-//         res.json({message: 'Jogo deletado'})
-//     } catch {
-//         console.log('aqui2')
-//         res.status(500).json({message: 'erro'})
-//     }
-// })
+router.delete('/:id', getUser , async (req,res)=>{
+    try {
+        await res.j.remove()
+        res.json({message: 'Jogo deletado'})
+    } catch {
+        console.log('aqui2')
+        res.status(500).json({message: 'erro'})
+    }
+})
 
 module.exports = router;
