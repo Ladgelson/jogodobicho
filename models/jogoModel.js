@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-
+const Schema = mongoose.Schema;
 const jogoSchema = new mongoose.Schema({
-    users: [{type: Schema.Types.ObjectId, ref: 'userSchema'}],
-    extracoes: [{type: Schema.Types.ObjectId, ref: 'extracoesSchema'}]
+    users: [{type: mongoose.Schema.Types.ObjectId, ref: 'userSchema'}],
+    extracoes: [{type: mongoose.Schema.Types.ObjectId, ref: 'extracoesSchema'}]
 })
 
 const jogo = mongoose.model('jogoSchema', jogoSchema);
-module.exports(jogo)
+module.exports = jogo

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Schema = mongoose.Schema;
 const extracaoSchema = new mongoose.Schema({
     jogo : { type: Schema.Types.ObjectId, ref: 'jogoSchema' },
     periodo: Number,

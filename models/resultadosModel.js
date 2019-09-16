@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Schema = mongoose.Schema;
 const resultadoSchema = new mongoose.Schema({
     extracao : { type: Schema.Types.ObjectId, ref: 'extracaoSchema' },
     bicho: Number,
