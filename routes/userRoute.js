@@ -34,14 +34,14 @@ router.post('/', async (req,res)=>{
 })
 
 // DELETE 
-router.delete('/:id', getUser , async (req,res)=>{
-    try {
-        await res.j.remove()
-        res.json({message: 'Jogo deletado'})
-    } catch {
-        console.log('aqui2')
-        res.status(500).json({message: 'erro'})
-    }
-})
+// router.delete('/:id', getUser , async (req,res)=>{
+//     try {
+//         await res.j.remove()
+//         res.json({message: 'Jogo deletado'})
+//     } catch {
+//         console.log('aqui2')
+//         res.status(500).json({message: 'erro'})
+//     }
+// })
 
 module.exports = router;
