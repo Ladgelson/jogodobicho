@@ -18,6 +18,9 @@ app.use('/',indexRouter);
 const userRoute = require('./routes/userRoute');
 app.use('/users', userRoute);
 
+const extracaoRoute = require('./routes/extracaoRoute')
+app.use('/extracoes', extracaoRoute)
+
 app.listen(PORT, () => {
     console.log('Servidor rodando...', PORT);
 });
