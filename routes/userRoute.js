@@ -21,7 +21,7 @@ router.get('/:id', getUser, (req, res) => {
 // POST
 router.post('/', async (req, res) => {
     const user = new User({
-        jogo: "5d801d6e25e8ce32c878df67",
+        jogo: "5d815d69c82b714788c4f4af",
         nome: req.body.nome,
         login: req.body.login,
         senha: req.body.senha,
