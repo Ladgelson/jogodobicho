@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/userModel');
+const addRefUserById = require('../controllers/jogo/addRefUserById');
 
 // GET
 router.get('/', async (req, res) => {
@@ -29,12 +30,12 @@ router.post('/', async (req, res) => {
         cambista: req.body.cambista,
         apostas: []
     });
-    console.log(user);
+    addRefUserById(user.jogo, user._id);
     try {
         const newUser = await user.save();
         res.status(201).json(newUser);
     } catch {
-        res.status(400).json({ message: "aqui dnv" });
+        res.status(400).json({ message: "Cannot save it!" });
     }
 });
 
