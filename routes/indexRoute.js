@@ -39,10 +39,8 @@ router.delete('/:id', getJogo , async (req,res)=>{
 
 // UPDATE
 router.patch('/:id', getJogo, async (req,res)=> {
-    console.log(req.body)
     if(req.body.user != null){
-        console.log(res)
-        res.jogo.users.push(req.body.user); 
+        res.jogo.users.push(req.body.user);
         try{
             const updatedUser = await res.jogo.save();
             res.json(updatedUser);
@@ -51,10 +49,10 @@ router.patch('/:id', getJogo, async (req,res)=> {
         }
     }
     if(req.body.extracao != null){
-        res.jogo.extracoes.include(req.body.extracao);
+        res.jogo.extracoes.push(req.body.extracao);
         try{
-            const updatedExtracao = await res.jogo.save();
-            res.json(updatedExtracao);
+            const updatedUser = await res.jogo.save();
+            res.json(updatedUser);
         } catch(err){
             res.status(400).json({message: err.message})
         }
@@ -69,11 +67,9 @@ async function getJogo(req, res, next){
             return res.status(404).json({message: 'Cannot find jogo'})
         }
     } catch {
-        console.log('aqui1')
         return res.status(500).json({message: 'erro'})
     }
-    console.log(j)
-    res.j = j
+    res.jogo = j
     next()
 }
 
