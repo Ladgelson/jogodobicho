@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const extracaoSchema = new mongoose.Schema({
     periodo: Number,
     datahora: Date,
-    resultados: [{ type: Schema.Types.ObjectId, ref: 'resultadoSchema'}]
+    resultados: { type: Schema.Types.ObjectId, ref: 'resultadoSchema'}
 })
 
 const extracao = mongoose.model('extracaoSchema', extracaoSchema)

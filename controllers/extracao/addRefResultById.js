@@ -12,7 +12,7 @@ async function addRefResultById(extracaoId,resultadoId){
     } catch {
         return res.status(500).json({message: 'erro'})
     }
-    extracao.resultados.push(resultadoId)
+    extracao.resultados = resultadoId
     try{
         await extracao.save();
     } catch(err){
