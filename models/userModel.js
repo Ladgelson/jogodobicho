@@ -5,10 +5,9 @@ const userSchema = new mongoose.Schema({
     nome: String,
     login: String,
     senha: String,
-    ehcambista: Boolean,
     adm: Boolean,
-    saldoCambista: {type: Schema.Types.ObjectId, ref: 'cambistaSchema'},
-    saldoUser: Number,
+    saldo: Number,
+    porcentagem: {type: Schema.Types.ObjectId, ref: 'porcentagemSchema'},
     apostas: [{type: Schema.Types.ObjectId, ref: 'apostasSchema'}],
 })
 

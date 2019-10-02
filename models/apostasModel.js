@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const apostasSchema = new mongoose.Schema({
-    user : { type: Schema.Types.ObjectId, ref: 'userSchema' },
     tipo: Number,
     datahora: Date,
     items: [{ type: Schema.Types.ObjectId, ref: 'apostaSchema'}]

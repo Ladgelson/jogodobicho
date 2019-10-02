@@ -6,7 +6,7 @@ const getJogo = require('../controllers/jogo/getJogoByIdOfPath');
 // GET
 router.get('/', async (req,res)=>{
     try{
-        const myjogo = await jogo.find().populate('users')
+        const myjogo = await jogo.find()
         res.send(myjogo)
     }catch(err){
         res.status(500).json({message: err.message})

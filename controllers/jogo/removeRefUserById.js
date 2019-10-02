@@ -1,6 +1,6 @@
 const Jogo = require('../../models/jogoModel');
 
-async function addRefUserById(userId){
+async function removeRefUserById(userId){
     let jogo;
     try{
         jogo = await Jogo.find()
@@ -10,7 +10,9 @@ async function addRefUserById(userId){
     } catch {
         return res.status(500).json({message: 'erro'})
     }
-    jogo[0].users.push(userId)
+    const index = jogo[0].users.indexOf(userId)
+    console.log(index)
+    jogo[0].users.splice(index,1)
     try{
         await jogo[0].save();
     } catch(err){
@@ -18,4 +20,4 @@ async function addRefUserById(userId){
     }
 }
 
-module.exports = addRefUserById
+module.exports = removeRefUserById

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/userModel');
 const addRefUserById = require('../controllers/jogo/addRefUserById');
+const removeRefUserById = require('../controllers/jogo/removeRefUserById');
 
 // GET
 router.get('/', async (req, res) => {
@@ -21,16 +22,15 @@ router.get('/:id', getUser, (req, res) => {
 // POST
 router.post('/', async (req, res) => {
     const user = new User({
-        jogo: "5d815d69c82b714788c4f4af",
         nome: req.body.nome,
         login: req.body.login,
         senha: req.body.senha,
         saldo: req.body.saldo,
+        porcentagem: req.body.porcentagem,
         adm: req.body.adm,
-        cambista: req.body.cambista,
         apostas: []
     });
-    addRefUserById(user.jogo, user._id);
+    addRefUserById(user._id);
     try {
         const newUser = await user.save();
         res.status(201).json(newUser);
@@ -54,6 +54,7 @@ router.patch('/:id', getUser, async (req, res) => {
 
 // DELETE 
 router.delete('/:id', getUser, async (req, res) => {
+    removeRefUserById(res.user._id)
     try {
         await res.user.remove();
         res.json({ message: 'User Deleted' });
