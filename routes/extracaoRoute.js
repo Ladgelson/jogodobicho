@@ -22,9 +22,8 @@ router.get('/:id', getExtracao, (req, res) => {
 // POST
 router.post('/', async (req, res) => {
     const extracao = new Extracao({
-        jogo : '5d815d69c82b714788c4f4af',
         periodo: 1,
-        datahora: Date.now(),
+        datahora: Date.now()
     });
     addRefExtracaoById(extracao.jogo, extracao._id);
     try {
