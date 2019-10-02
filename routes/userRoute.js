@@ -41,8 +41,8 @@ router.post('/', async (req, res) => {
 
 // PATCH
 router.patch('/:id', getUser, async (req, res) => {
-    if (req.body.nome != null) {
-        res.user.nome = req.body.nome
+    if (req.body.saldo != null) {
+        res.user.saldo = req.body.saldo
     }
     try {
         const updatedUser = await res.user.save();
@@ -65,7 +65,7 @@ router.delete('/:id', getUser, async (req, res) => {
 async function getUser(req, res, next) {
     let user;
     try {
-        user = await User.findById(req.params.id)
+        user = await User.findById(req.params.id).populate('apostas')
         if (user == null) {
             return res.status(404).json({ message: 'Cannot find user' });
         }

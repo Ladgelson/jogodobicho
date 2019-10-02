@@ -1,43 +1,35 @@
 const express = require('express');
 const router = express.Router();
 const Aposta = require('../models/apostasModel');
-const getUser = require('../controllers/user/getUserByIdOfPath')
+const getUser = require('../controllers/user/getUserByIdOfPath');
+const addRefApostaById = require('../controllers/user/addRefApostaById');
 
 // GET
-router.get('/', getUser, async (req, res) => {
+router.get('/:id/apostas', getUser, async (req, res) => {
     try {
-        const user = await User.find();
-        res.send(user);
+        const user = res.user
+        res.send(user.apostas);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
-// GET-by-ID
-// router.get('/:id', getUser, (req, res) => {
-//     res.send(res.user);
-// });
-
 // // POST
-// router.post('/', async (req, res) => {
-//     const user = new User({
-//         jogo: "5d815d69c82b714788c4f4af",
-//         nome: req.body.nome,
-//         login: req.body.login,
-//         senha: req.body.senha,
-//         saldo: req.body.saldo,
-//         adm: req.body.adm,
-//         cambista: req.body.cambista,
-//         apostas: []
-//     });
-//     addRefUserById(user.jogo, user._id);
-//     try {
-//         const newUser = await user.save();
-//         res.status(201).json(newUser);
-//     } catch {
-//         res.status(400).json({ message: "Cannot save it!" });
-//     }
-// });
+router.post('/:id/apostas', getUser, async (req, res) => {
+    const aposta = new Aposta({
+        user: req.params.id,
+        tipo: req.body.tipo,
+        datahora: new Date(),
+        items: []
+    });
+    addRefApostaById(aposta.user, aposta._id);
+    try {
+        const newAposta = await aposta.save();
+        res.status(201).json(newAposta);
+    } catch {
+        res.status(400).json({ message: "Can't save aposta!" });
+    }
+});
 
 // // PATCH
 // router.patch('/:id', getUser, async (req, res) => {

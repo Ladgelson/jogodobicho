@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
-    jogo: {type: Schema.Types.ObjectId, ref: 'jogoSchema'},
     nome: String,
     login: String,
     senha: String,
-    saldo: Number,
+    ehcambista: Boolean,
     adm: Boolean,
-    cambista: {type: Schema.Types.ObjectId, ref: 'cambistaSchema'},
+    saldoCambista: {type: Schema.Types.ObjectId, ref: 'cambistaSchema'},
+    saldoUser: Number,
     apostas: [{type: Schema.Types.ObjectId, ref: 'apostasSchema'}],
 })
 
