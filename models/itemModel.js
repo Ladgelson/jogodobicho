@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const itemSchema = new mongoose.Schema({
+    aposta: {type: mongoose.Schema.Types.ObjectId, ref: 'apostasSchema'},
     posicao: Number,
     valor: Number,
     bicho: Number

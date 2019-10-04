@@ -2,7 +2,7 @@ const User = require('../../models/userModel')
 async function getUser(req, res, next){
     let user
     try{
-        user = await User.findById(req.params.id)
+        user = await User.findById(req.params.id).populate('apostas')
         if(user == null){
             return res.status(404).json({message: 'Cannot find jogo'})
         }
