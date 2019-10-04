@@ -33,7 +33,6 @@ router.delete('/:id', getJogo , async (req,res)=>{
         await res.j.remove()
         res.json({message: 'Jogo deletado'})
     } catch {
-        console.log('aqui2')
         res.status(500).json({message: 'erro'})
     }
 })

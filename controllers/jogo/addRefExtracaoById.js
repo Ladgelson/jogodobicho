@@ -1,18 +1,18 @@
 const Jogo = require('../../models/jogoModel');
 
-async function addRefExtracaoById(jogoId,extracaoId){
+async function addRefExtracaoById(extracaoId){
     let jogo;
     try{
-        jogo = await Jogo.findById(jogoId)
+        jogo = await Jogo.find()
         if(jogo == null){
             return res.status(404).json({message: 'Cannot find jogo'})
         }
     } catch {
         return res.status(500).json({message: 'erro'})
     }
-    jogo.extracoes.push(extracaoId)
+    jogo[0].extracoes.push(extracaoId)
     try{
-        await jogo.save();
+        await jogo[0].save();
     } catch(err){
         res.status(400).json({message: err.message})
     }

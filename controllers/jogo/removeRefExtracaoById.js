@@ -1,6 +1,6 @@
 const Jogo = require('../../models/jogoModel');
 
-async function removeRefUserById(userId){
+async function removeRefExtracaoById(extracaoId){
     let jogo;
     try{
         jogo = await Jogo.find()
@@ -10,8 +10,8 @@ async function removeRefUserById(userId){
     } catch {
         return res.status(500).json({message: 'erro'})
     }
-    const index = jogo[0].users.indexOf(userId)
-    jogo[0].users.splice(index,1)
+    const index = jogo[0].extracoes.indexOf(extracaoId)
+    jogo[0].extracoes.splice(index,1)
     try{
         await jogo[0].save();
     } catch(err){
@@ -19,4 +19,4 @@ async function removeRefUserById(userId){
     }
 }
 
-module.exports = removeRefUserById
+module.exports = removeRefExtracaoById
