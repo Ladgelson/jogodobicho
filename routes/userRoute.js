@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 
 // GET-by-ID
 router.get('/:id', getUser, (req, res) => {
-    res.send(res.user);
+    res.send(res.user).populate('apostas');
 });
 
 // POST
@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
         const newUser = await user.save();
         res.status(201).json(newUser);
     } catch {
-        res.status(400).json({ message: "Cannot save it!" });
+        res.status(400).json({ message: "Cannot save user!" });
     }
 });
 
@@ -54,6 +54,7 @@ router.patch('/:id', getUser, async (req, res) => {
 
 // DELETE 
 router.delete('/:id', getUser, async (req, res) => {
+    // apaga ref de user em jogo
     removeRefUserById(res.user._id)
     try {
         await res.user.remove();
