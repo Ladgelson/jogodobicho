@@ -5,7 +5,8 @@ const apostasSchema = new mongoose.Schema({
     datahoraAposta: Date,
     data: Date,
     periodo: Number,
-    items: [{ type: Schema.Types.ObjectId, ref: 'apostaSchema'}]
+    items: [{ type: Schema.Types.ObjectId, ref: 'apostaSchema'}],
+    ganhou: Boolean,
 })
 const apostas = mongoose.model('apostasSchema', apostasSchema)
 module.exports = apostas

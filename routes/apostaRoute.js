@@ -17,9 +17,12 @@ router.get('/:id/apostas', getUser, async (req, res) => {
 // // POST
 router.post('/:id/apostas', getUser, async (req, res) => {
     const aposta = new Aposta({
-        user: req.params.id,
         tipo: req.body.tipo,
-        items: []
+        datahoraAposta: new Date(),
+        data: new Date(),
+        periodo: req.body.periodo,
+        items: [],
+        ganhou: req.body.ganhou,
     });
     addRefApostaById(req.params.id, aposta._id);
     try {

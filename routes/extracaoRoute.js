@@ -4,7 +4,8 @@ const Extracao = require('../models/extracoesModel');
 const Resultado = require('../models/resultadosModel');
 const addRefExtracaoById = require('../controllers/jogo/addRefExtracaoById');
 const getExtracao = require('../controllers/extracao/getExtracaoByIdOfPath');
-const removeRefExtracaoById = require('../controllers/jogo/removeRefExtracaoById')
+const removeRefExtracaoById = require('../controllers/jogo/removeRefExtracaoById');
+const verificaSeGanhou = require('../controllers/aposta/verificaSeGanhou');
 
 // GET
 router.get('/', async (req, res) => {
@@ -28,6 +29,7 @@ router.post('/', async (req, res) => {
         datahora: req.body.datahora
     });
     addRefExtracaoById(extracao._id);
+    verificaSeGanhou(extracao.id)
     try {
         const newExtracao = await extracao.save();
         res.status(201).json(newExtracao);
