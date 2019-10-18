@@ -25,7 +25,17 @@ router.get('/:id', getExtracao, (req, res) => {
 router.post('/', async (req, res) => {
     const extracao = new Extracao({
         periodo: req.body.periodo,
-        datahora: req.body.datahora
+        datahora: new Date(),
+        n1: req.body.n1,
+        n2: req.body.n2,
+        n3: req.body.n3,
+        n4: req.body.n4,
+        n5: req.body.n5,
+        n6: req.body.n6,
+        n7: req.body.n7,
+        n8: req.body.n8,
+        n9: req.body.n9,
+        n10: req.body.n10,
     });
     addRefExtracaoById(extracao._id);
     verificaSeGanhou(extracao.id)

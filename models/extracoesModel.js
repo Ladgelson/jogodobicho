@@ -2,16 +2,16 @@ const mongoose = require('mongoose');
 const extracaoSchema = new mongoose.Schema({
     periodo: Number,
     data: Date,
-    n1: Number,
-    n2: Number,
-    n3: Number,
-    n4: Number,
-    n5: Number,
-    n6: Number,
-    n7: Number,
-    n8: Number,
-    n9: Number,
-    n10: Number,
+    n1: String,
+    n2: String,
+    n3: String,
+    n4: String,
+    n5: String,
+    n6: String,
+    n7: String,
+    n8: String,
+    n9: String,
+    n10: String,
 })
 
 const extracao = mongoose.model('extracaoSchema', extracaoSchema)
