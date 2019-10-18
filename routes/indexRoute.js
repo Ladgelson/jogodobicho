@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jogo = require('../models/jogoModel');
 const getJogo = require('../controllers/jogo/getJogoByIdOfPath');
+const Porcentagem = require('../models/porcentagemModel')
 
 // GET
 router.get('/', async (req,res)=>{
@@ -19,6 +20,26 @@ router.post('/', async (req,res)=>{
         users: [],
         extracoes: []
     })
+    const porcentagens = [
+        new Porcentagem({
+            valor: 5,
+        }),
+        new Porcentagem({
+            valor: 10,
+        }),
+        new Porcentagem({
+            valor: 15,
+        }),
+        new Porcentagem({
+            valor: 20,
+        }),
+    ]
+    try{
+        const p = await porcentagens.save()
+        res.status(201).json(p)
+    } catch {
+        res.status(400).json({message: err.message})
+    }
     try{
         const newJ = await j.save()
         res.status(201).json(newJ)

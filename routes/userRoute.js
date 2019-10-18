@@ -28,6 +28,7 @@ router.post('/', async (req, res) => {
         saldo: req.body.saldo,
         porcentagem: req.body.porcentagem,
         adm: req.body.adm,
+        tipo: req.body.tipo,
         apostas: []
     });
     addRefUserById(user._id);
