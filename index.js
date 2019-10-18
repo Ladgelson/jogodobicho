@@ -21,14 +21,8 @@ app.use('/users', userRoute);
 const extracaoRoute = require('./routes/extracaoRoute')
 app.use('/extracoes', extracaoRoute)
 
-const resultadoRoute = require('./routes/resultadoRoute')
-app.use('/extracoes', resultadoRoute)
-
 const apostaRoute = require('./routes/apostaRoute')
 app.use('/users',apostaRoute)
-
-const itemRoute = require('./routes/itemRoute')
-app.use('/users',itemRoute)
 
 app.listen(PORT, () => {
     console.log('Servidor rodando...', PORT);
