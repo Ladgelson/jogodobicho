@@ -16,10 +16,13 @@ router.get('/:id/apostas', getUser, async (req, res) => {
 
 // // POST
 router.post('/:id/apostas', getUser, async (req, res) => {
+    const data = new Date
     const aposta = new Aposta({
         tipo: req.body.tipo,
         datahoraAposta: new Date(),
-        data: new Date(),
+        ano: data.getFullYear().toString(),
+        mes: (data.getMonth()+1).toString(),
+        dia: data.getDay().toString(),
         periodo: req.body.periodo,
         i1: req.body.i1,
         i2: req.body.i2,

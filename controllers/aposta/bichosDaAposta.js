@@ -30,6 +30,7 @@ function bichosDaAposta(aposta){
     if(aposta.i10){
         v.push(aposta.i10)
     } 
+    return v
 }
 
 module.exports = bichosDaAposta

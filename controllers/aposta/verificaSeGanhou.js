@@ -1,44 +1,23 @@
-const Extracao = require('../../models/extracoesModel');
-const Aposta = require('../../models/apostasModel');
-const bichos = require('./bichos');
 const bichosDaExtracao = require('./bichosDaExtracao');
 const bichosDaAposta = require('./bichosDaAposta')
 
-async function verificaSeGanhou(idExtracao){
-    let allApostas;
-    let extracao;
-    console.log('aqui1')
-    try{
-        extracao = await Extracao.findById(idExtracao)
-        if(extracao == null){
-            return res.status(404).json({message: 'Cannot find extracao!'})
-        }
-    } catch {
-        return res.status(500).json({message: 'erro'})
-    }
-    console.log('aqui2')
-    try{
-        allApostas = await Aposta.find()
-        if(allApostas == null){
-            return res.status(404).json({message: 'Cannot find apostas!'})
-        }
-    } catch {
-        return res.status(500).json({message: 'erro'})
-    }
-    console.log('aqui3')
+async function verificaSeGanhou(extracao,allApostas){
+    // console.log(`extracao: ${JSON.stringify(extracao)}`)
+    // console.log(`allApostas: ${JSON.stringify(allApostas)}`)
     let apostasDaExtracao = allApostas.filter((item)=>{
         let aposta = false
         if(//item.data == extracao.data && 
             item.periodo === extracao.periodo) aposta = true;  
         return aposta;
     })
+    console.log(apostasDaExtracao)
 
     const bichosExtracao = bichosDaExtracao(extracao)
     console.log('AQUIIIIIIIII')
     apostasDaExtracao.map(async (item)=> {
-        console.log('dflksdjfkdsfk')
         let ganhou = false
-        let bichosAposta = bichosDaAposta(item.apostas)
+        let bichosAposta = bichosDaAposta(item)
+        console.log('bichosAposta',bichosAposta)
         bichosExtracao.map((item)=> {
             if(bichosAposta.includes(item)){
                ganhou = true 

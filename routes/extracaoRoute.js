@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Aposta = require('../models/apostasModel');
 const Extracao = require('../models/extracoesModel');
 const addRefExtracaoById = require('../controllers/jogo/addRefExtracaoById');
 const getExtracao = require('../controllers/extracao/getExtracaoByIdOfPath');
@@ -38,7 +39,16 @@ router.post('/', async (req, res) => {
         n10: req.body.n10,
     });
     addRefExtracaoById(extracao._id);
-    verificaSeGanhou(extracao.id)
+    let allApostas;
+    try{
+        allApostas = await Aposta.find()
+        if(allApostas == null){
+            return res.status(404).json({message: 'Cannot find apostas!'})
+        }
+    } catch {
+        return res.status(500).json({message: 'erro'})
+    }
+    verificaSeGanhou(extracao,allApostas)
     try {
         const newExtracao = await extracao.save();
         res.status(201).json(newExtracao);

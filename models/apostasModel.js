@@ -3,7 +3,9 @@ const Schema = mongoose.Schema
 const apostasSchema = new mongoose.Schema({
     tipo: Number,
     datahoraAposta: Date,
-    data: Date,
+    ano: Date,
+    mes: Date,
+    dia: Date,
     periodo: Number,
     i1: Number,
     i2: Number,
