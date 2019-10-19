@@ -6,6 +6,7 @@ const addRefExtracaoById = require('../controllers/jogo/addRefExtracaoById');
 const getExtracao = require('../controllers/extracao/getExtracaoByIdOfPath');
 const removeRefExtracaoById = require('../controllers/jogo/removeRefExtracaoById');
 const verificaSeGanhou = require('../controllers/aposta/verificaSeGanhou');
+const moment = require('moment');
 
 // GET
 router.get('/', async (req, res) => {
@@ -26,7 +27,9 @@ router.get('/:id', getExtracao, (req, res) => {
 router.post('/', async (req, res) => {
     const extracao = new Extracao({
         periodo: req.body.periodo,
-        datahora: new Date(),
+        ano: moment().get('year'),
+        mes: moment().get('month'),
+        dia: moment().get('date'),
         n1: req.body.n1,
         n2: req.body.n2,
         n3: req.body.n3,

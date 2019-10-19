@@ -3,6 +3,7 @@ const router = express.Router();
 const Aposta = require('../models/apostasModel');
 const getUser = require('../controllers/user/getUserByIdOfPath');
 const addRefApostaById = require('../controllers/user/addRefApostaById');
+const moment = require('moment');
 
 // GET
 router.get('/:id/apostas', getUser, async (req, res) => {
@@ -16,13 +17,12 @@ router.get('/:id/apostas', getUser, async (req, res) => {
 
 // // POST
 router.post('/:id/apostas', getUser, async (req, res) => {
-    const data = new Date
     const aposta = new Aposta({
         tipo: req.body.tipo,
         datahoraAposta: new Date(),
-        ano: data.getFullYear().toString(),
-        mes: (data.getMonth()+1).toString(),
-        dia: data.getDay().toString(),
+        ano: moment().get('year'),
+        mes: moment().get('month'),
+        dia: moment().get('date'),
         periodo: req.body.periodo,
         i1: req.body.i1,
         i2: req.body.i2,

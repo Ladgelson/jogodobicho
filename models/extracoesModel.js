@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const extracaoSchema = new mongoose.Schema({
     periodo: Number,
-    data: Date,
+    ano: Number,
+    mes: Number,
+    dia: Number,
     n1: String,
     n2: String,
     n3: String,
