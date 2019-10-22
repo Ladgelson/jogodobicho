@@ -5,10 +5,22 @@ const addRefUserById = require('../controllers/jogo/addRefUserById');
 const removeRefUserById = require('../controllers/jogo/removeRefUserById');
 
 // GET
-router.get('/', async (req, res) => {
+router.get('/allUsers/:page', async (req, res) => {
+    const resPerPage = 9; // results per page
+    const page = req.params.page || 1; // Page
     try {
-        const user = await User.find();
-        res.send(user);
+        const usersFound = await User.find()
+            .skip((resPerPage * page)-resPerPage)
+            .limit(resPerPage);
+        const numOfUsers = await User.countDocuments();
+                                
+        const usersDTO = {
+            users: usersFound, 
+            currentPage: page, 
+            pages: Math.ceil(numOfUsers / resPerPage), 
+            numOfResults: numOfUsers
+        }
+        res.send(usersDTO);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -43,7 +55,7 @@ router.post('/', async (req, res) => {
 // PATCH
 router.patch('/:id', getUser, async (req, res) => {
     if (req.body.saldo != null) {
-        res.user.saldo = req.body.saldo
+        res.user.saldo += req.body.saldo
     }
     try {
         const updatedUser = await res.user.save();

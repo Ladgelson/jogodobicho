@@ -8,19 +8,27 @@ const removeRefExtracaoById = require('../controllers/jogo/removeRefExtracaoById
 const verificaSeGanhou = require('../controllers/aposta/verificaSeGanhou');
 const moment = require('moment');
 
-// GET
-router.get('/', async (req, res) => {
+router.get('/:page', async (req, res, next) => {
+    // Declaring variable
+    const resPerPage = 9; // results per page
+    const page = req.params.page || 1; // Page 
     try {
-        const extracao = await Extracao.find();
-        res.send(extracao);
+        const foundExtracoes = await Extracao.find({})
+            .skip((resPerPage * page) - resPerPage)
+            .limit(resPerPage);
+        // Count how many products were found
+        const numOfExtracoes = await Extracao.countDocuments();
+        // Renders The Page
+        const extracoesDTO = {
+            extracoes: foundExtracoes, 
+            currentPage: page, 
+            pages: Math.ceil(numOfExtracoes / resPerPage), 
+            numOfResults: numOfExtracoes
+        }
+        res.send(extracoesDTO);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
-});
-
-// GET-by-ID
-router.get('/:id', getExtracao, (req, res) => {
-    res.send(res.extracao);
 });
 
 // POST
