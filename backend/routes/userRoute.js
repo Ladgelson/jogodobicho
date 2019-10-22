@@ -4,6 +4,12 @@ const User = require('../models/userModel');
 const addRefUserById = require('../controllers/jogo/addRefUserById');
 const removeRefUserById = require('../controllers/jogo/removeRefUserById');
 
+const userTypes = {
+    1: 'Usuário Comum',
+    2: 'Cambista',
+    3: 'Cambista Ilimitado'
+}
+
 // GET
 router.get('/allUsers/:page', async (req, res) => {
     const resPerPage = 9; // results per page
@@ -28,7 +34,7 @@ router.get('/allUsers/:page', async (req, res) => {
 
 // GET-by-ID
 router.get('/:id', getUser, (req, res) => {
-    res.send(res.user).populate('apostas');
+    res.send(res.user);
 });
 
 // POST

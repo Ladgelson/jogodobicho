@@ -45,6 +45,7 @@ router.post('/:id/apostas', getUser, async (req, res) => {
             res.status(400).json({ message: "Can't save saldo of the user!" });
         }
         const aposta = new Aposta({
+            nomeDoApostador: req.body.nomeDoApostador,
             user: req.params.id,
             tipo: req.body.tipo,
             datahoraAposta: new Date(),
