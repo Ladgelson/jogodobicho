@@ -10,10 +10,12 @@ router.get('/:id/apostas/:page', async (req, res) => {
     const resPerPage = 9; // results per page
     const page = req.params.page || 1; // Page
     try {
-        const foundApostas = await Aposta.find()
-                                .skip((resPerPage*page)-resPerPage)
-                                .limit(resPerPage);
-        const numOfApostas = await Aposta.countDocuments    ();
+        const foundApostas 
+            = await Aposta
+                .find({user: req.params.id})
+                .skip((resPerPage*page)-resPerPage)
+                .limit(resPerPage)
+        const numOfApostas = await Aposta.countDocuments({user: req.params.id});
         const apostasDTO = {
             apostas: foundApostas, 
             currentPage: page, 
@@ -81,6 +83,27 @@ router.post('/:id/apostas', getUser, async (req, res) => {
         }
     } else {
         res.status(202).json({ message: "Saldo insuficient!" });
+    }
+});
+
+router.get('/allApostas/:page', async (req, res) => {
+    const resPerPage = 9; // results per page
+    const page = req.params.page || 1; // Page
+    try {
+        const foundApostas =
+            await Aposta.find()
+                        .skip((resPerPage*page)-resPerPage)
+                        .limit(resPerPage);
+        const numOfApostas = await Aposta.countDocuments();
+        const apostasDTO = {
+            apostas: foundApostas, 
+            currentPage: page, 
+            pages: Math.ceil(numOfApostas / resPerPage), 
+            numOfResults: numOfApostas
+        }
+        res.send(apostasDTO);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 });
 
