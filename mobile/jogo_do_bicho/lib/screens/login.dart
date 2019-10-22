@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jogo_do_bicho/components/color.dart';
+import 'package:jogo_do_bicho/screens/adm/app.dart';
 
 class login extends StatefulWidget {
   @override
@@ -20,7 +20,7 @@ class _loginState extends State<login> {
         ),
         title: Text(
           "Jogo do bicho",
-          style: TextStyle(color: Cores.palavra),
+          style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
         backgroundColor: Colors.redAccent, //70c0b3
@@ -129,12 +129,12 @@ class _loginState extends State<login> {
                       color: Colors.redAccent,
                       onPressed: () {
                         if (_chave.currentState.validate()){
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => monitoramento(),
-                          //     ));
-                          // ;
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => users(),
+                              ));
+                          ;
                         }
                       },
                       child: Text("Login",

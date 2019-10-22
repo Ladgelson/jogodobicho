@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jogo_do_bicho/components/color.dart';
 import 'package:jogo_do_bicho/screens/login.dart';
+//import 'package:jogo_do_bicho/screens/adm/users.dart';
 
 void main() {
   runApp(MaterialApp(
