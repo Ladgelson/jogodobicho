@@ -1,108 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:jogo_do_bicho/components/bottomNavBar.dart';
-import 'package:jogo_do_bicho/components/usersAdm.dart';
 
-class appAdm extends StatefulWidget {
-  appAdm({Key key, this.title}) : super(key: key);
+class UsersAdm extends StatelessWidget {
+  final List<UserItem> items;
 
-  final String title;
-  @override
-  _appAdmState createState() => _appAdmState();
-}
-
-class _appAdmState extends State<appAdm> {
-
-  int currentIndex = 0;
-  int _counter = 0;
-
-  var _users = [ 
-    UserItem(
-      nome: "Micaias",
-      tipo: "USUÀRIO",
-      ultimaAposta: "Ultima aposta: hoje",
-      saldo: "200.0",
-      qtd: "114"
-    ), 
-    UserItem(
-      nome: "Micaias",
-      tipo: "USUÀRIO",
-      ultimaAposta: "Ultima aposta: hoje",
-      saldo: "200.0",
-      qtd: "114"
-    ),
-    UserItem(
-      nome: "Micaias",
-      tipo: "USUÀRIO",
-      ultimaAposta: "Ultima aposta: hoje",
-      saldo: "200.0",
-      qtd: "114"
-    )
-  ];
-
-  void _incrementCounter() {
-    print(_users);
-    setState(() {
-      _counter++;
-    });
+  UsersAdm(
+      {Key key,
+        @required this.items}) {
+    assert(items != null);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Usuários'),
-      ),
-      backgroundColor: Colors.grey[900],
-      body: UsersAdm(
-        items: _users,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-        backgroundColor: Colors.redAccent
-      ),
-      bottomNavigationBar: BottomNavyBar(
-        selectedIndex: currentIndex,
-        showElevation: true,
-        onItemSelected: (index) => setState(() {
-          currentIndex = index;
-        }),
-        items: [
-          BottomNavyBarItem(
-              icon: Icon(Icons.people),
-              title: Text('Usuários'),
-              activeColor: Colors.redAccent
-          ),
-          BottomNavyBarItem(
-            icon: Icon(Icons.apps),
-            title: Text('Extracoes'),
-            activeColor: Colors.redAccent,
-          ),
-          BottomNavyBarItem(
-              icon: Icon(Icons.message),
-              title: Text('Apostas'),
-              activeColor: Colors.redAccent
-          ),
-          BottomNavyBarItem(
-              icon: Icon(Icons.settings),
-              title: Text('Config'),
-              activeColor: Colors.redAccent
-          ),
-        ],
+    return Container(
+      child: Column(
+        children: items.map((item) {  
+          return GestureDetector(
+            onTap: () {
+              print("Aqui");
+            },
+            child: buildItem(item),
+          );
+        }).toList(),
       ),
     );
   }
-}
 
-BoxDecoration myBoxDecoration() {
-  return BoxDecoration(
-    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-    color: Colors.grey[800],
-  );
-}
-
-Widget builderItem(context, index){
+  Widget buildItem(UserItem item){
+  print(item);
   return Padding(
     padding: EdgeInsets.all(5.0),
     child: Container(
@@ -125,13 +49,13 @@ Widget builderItem(context, index){
                   //color: Colors.tealAccent,
                   padding: const EdgeInsets.fromLTRB(10.0, 6.0, 0.0, 1.0),
                   alignment: Alignment.topLeft,
-                  child: Text('Micaías', style: TextStyle(color: Colors.white, fontSize: 20.0)),
+                  child: Text(item.nome, style: TextStyle(color: Colors.white, fontSize: 20.0)),
                 ),
                 Container(
                   //color: Colors.redAccent,
                   padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 2.0),
                   alignment: Alignment.topLeft,
-                  child: Text('CAMBISTA', 
+                  child: Text(item.tipo, 
                     style: TextStyle(color: Colors.grey[400], fontSize: 10.0)
                   ),
                 ),
@@ -139,7 +63,7 @@ Widget builderItem(context, index){
                   //color: Colors.redAccent,
                   padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 2.0),
                   alignment: Alignment.topLeft,
-                  child: Text('Última aposta: Ontem', 
+                  child: Text(item.ultimaAposta, 
                     style: TextStyle(color: Colors.grey, fontSize: 13.0)
                   ),
                 ),
@@ -166,7 +90,7 @@ Widget builderItem(context, index){
                       height: 22.0,
                       padding: const EdgeInsets.fromLTRB(0.0, 0.0, 2.0, 0.0),
                       alignment: Alignment.topLeft,
-                      child: Text('100.00', style: TextStyle(color: Colors.yellowAccent, fontSize: 20.0)),
+                      child: Text(item.saldo, style: TextStyle(color: Colors.yellowAccent, fontSize: 20.0)),
                     ),
                   ],
                 ),
@@ -185,7 +109,7 @@ Widget builderItem(context, index){
                       //color: Colors.cyanAccent,
                       padding: const EdgeInsets.fromLTRB(2.0, 2.0, 0.0, 2.0),
                       alignment: Alignment.topLeft,
-                      child: Text('14', style: TextStyle(color: Colors.greenAccent, fontSize: 20.0)),
+                      child: Text(item.qtd, style: TextStyle(color: Colors.greenAccent, fontSize: 20.0)),
                     ),
                   ],
                 ),
@@ -196,4 +120,33 @@ Widget builderItem(context, index){
       ),
     ),
   );
+}
+}
+
+BoxDecoration myBoxDecoration() {
+  return BoxDecoration(
+    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+    color: Colors.grey[800],
+  );
+}
+
+
+
+class UserItem {
+  final String nome;
+  final String tipo;
+  final String ultimaAposta;
+  final String saldo;
+  final String qtd;
+  UserItem({ @required this.nome,
+        @required this.tipo,
+        @required this.ultimaAposta,
+        @required this.saldo,
+        @required this.qtd}) {
+    assert(nome != null);
+    assert(tipo != null);
+    assert(ultimaAposta != null);
+    assert(saldo != null);
+    assert(qtd != null);
+  }
 }
