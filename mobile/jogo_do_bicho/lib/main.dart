@@ -4,7 +4,7 @@ import 'package:jogo_do_bicho/screens/adm/app.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: appAdm(),
+    home: AppAdm(),
     theme: ThemeData(
       hintColor: Colors.redAccent,
       primaryColor: Colors.redAccent,

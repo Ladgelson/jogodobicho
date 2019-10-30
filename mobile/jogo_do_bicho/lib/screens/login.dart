@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:jogo_do_bicho/screens/adm/app.dart';
 
-class login extends StatefulWidget {
+class Login extends StatefulWidget {
   @override
-  _loginState createState() => _loginState();
+  _LoginState createState() => _LoginState();
 }
 
-class _loginState extends State<login> {
+class _LoginState extends State<Login> {
   GlobalKey<FormState> _chave = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
@@ -73,7 +73,7 @@ class _loginState extends State<login> {
                   controller: emailController,
                   validator: (value) {
                     if (value.isEmpty) {
-                      return "Informe seu login!";
+                      return "Informe seu Login!";
                     } else {
                       bool _have = false;
                       for(int i=0;i<value.length;++i){
@@ -132,9 +132,8 @@ class _loginState extends State<login> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => appAdm(),
+                                builder: (context) => AppAdm(),
                               ));
-                          ;
                         }
                       },
                       child: Text("Login",
