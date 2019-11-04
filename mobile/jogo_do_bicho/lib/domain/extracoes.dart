@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
 class ExtracaoItem {
-  final int ano;
-  final int mes;
-  final int dia;
-  final int periodo;
-  final String num1;
-  final String num2;
-  final String num3;
-  final String num4;
-  final String num5;
-  final String num6;
-  final String num7;
-  final String num8;
-  final String num9;
-  final String num10;
+  int ano;
+  int mes;
+  int dia;
+  int periodo;
+  String num1;
+  String num2;
+  String num3;
+  String num4;
+  String num5;
+  String num6;
+  String num7;
+  String num8;
+  String num9;
+  String num10;
   ExtracaoItem({ 
         @required this.periodo,
         @required this.num1,

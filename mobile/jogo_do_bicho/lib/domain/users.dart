@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class UserItem {
-  final String nome;
-  final String tipo;
-  final String ultimaAposta;
-  final String saldo;
-  final String qtd;
+  String nome;
+  String tipo;
+  String ultimaAposta;
+  String saldo;
+  String qtd;
   UserItem({ @required this.nome,
         @required this.tipo,
         @required this.ultimaAposta,

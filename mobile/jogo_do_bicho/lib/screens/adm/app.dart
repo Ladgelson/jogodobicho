@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:jogo_do_bicho/components/bottomNavBar.dart';
 import 'package:jogo_do_bicho/domain/users.dart';
 import 'package:jogo_do_bicho/domain/extracoes.dart';
+import 'package:jogo_do_bicho/domain/apostas.dart';
+import 'package:jogo_do_bicho/components/user.dart';
+import 'package:jogo_do_bicho/components/aposta.dart';
+import 'package:jogo_do_bicho/components/extracao.dart';
 
 class AppAdm extends StatefulWidget {
   AppAdm({Key key, this.title}) : super(key: key);
@@ -11,7 +15,7 @@ class AppAdm extends StatefulWidget {
   _appAdmState createState() => _appAdmState();
 }
 
-var _users = [ 
+var users = [ 
   UserItem(
     nome: "Ladgelson",
     tipo: "USUÀRIO",
@@ -35,7 +39,7 @@ var _users = [
   ),
 ];
 
-var _extracoes = [ 
+var extracoes = [ 
   ExtracaoItem(
     periodo: 1,
     dia: 19,
@@ -70,14 +74,51 @@ var _extracoes = [
   ),
 ];
 
+var apostas = [ 
+  ApostaItem(
+    periodo: 1,
+    dia: 19,
+    mes: 8,
+    ano: 2019,
+    nomeDoApostador: "Monica",
+    tipo: 1,
+    datahoraAposta: "23/04 22h",
+    i1: 150,
+    i2: 10,
+    i3: 10,
+    i4: 10,
+    i5: 10,
+    i6: 10,
+    i7: 10,
+    i8: 10,
+    i9: 10,
+    i10: 10,
+    v1: 150,
+    v2: 10,
+    v3: 10,
+    v4: 10,
+    v5: 10,
+    v6: 10,
+    v7: 10,
+    v8: 10,
+    v9: 10,
+    v10: 10,
+    ganhou: false,
+  ),
+];
+
 var _tipos = [
   {
-    "len": _users.length,
+    "len": users.length,
     "builder": builderItemUser
   },
   {
-    "len": _extracoes.length,
+    "len": extracoes.length,
     "builder": builderItemExtracao
+  },
+  {
+    "len": apostas.length,
+    "builder": builderItemAposta
   }
 ];
 
@@ -87,17 +128,17 @@ class _appAdmState extends State<AppAdm> {
   int _counter = 0;
 
   void _incrementCounter() {
-    _users.add(UserItem(
+    users.add(UserItem(
       nome: "Kakaka",
       tipo: "CAMBISTA",
       ultimaAposta: "Ultima aposta: Ontem",
       saldo: "10.0",
       qtd: "2"
     ));
-    print(_users);
+    print(users);
     setState(() {
-      _users;
-      _tipos[currentIndex]['len'] = _users.length;
+      users;
+      _tipos[currentIndex]['len'] = users.length;
     });
   }
 
@@ -128,22 +169,22 @@ class _appAdmState extends State<AppAdm> {
           BottomNavyBarItem(
               icon: Icon(Icons.people),
               title: Text('Usuários'),
-              activeColor: Colors.redAccent
+              activeColor: Colors.white
           ),
           BottomNavyBarItem(
-            icon: Icon(Icons.apps),
+            icon: Icon(Icons.beenhere),
             title: Text('Extracoes'),
-            activeColor: Colors.redAccent,
+            activeColor: Colors.white,
           ),
           BottomNavyBarItem(
-              icon: Icon(Icons.message),
+              icon: Icon(Icons.casino),
               title: Text('Apostas'),
-              activeColor: Colors.redAccent
+              activeColor: Colors.white
           ),
           BottomNavyBarItem(
               icon: Icon(Icons.settings),
               title: Text('Config'),
-              activeColor: Colors.redAccent
+              activeColor: Colors.white
           ),
         ],
       ),
@@ -155,357 +196,5 @@ BoxDecoration myBoxDecoration() {
   return BoxDecoration(
     borderRadius: BorderRadius.all(Radius.circular(5.0)),
     color: Colors.grey[800],
-  );
-}
-
-// construtor da lista de usuários 
-Widget builderItemUser(context, index){
-  return Padding(
-    padding: EdgeInsets.all(5.0),
-    child: Container(
-      height: 70.0,
-      decoration: myBoxDecoration(),
-      child: Row(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(left: 8.0,bottom: 10.0, top: 10.0),
-            child: Icon(
-              Icons.assignment_ind,
-              size: 50.0,
-              color: Colors.white,
-            ),
-          ),
-          Expanded(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  //color: Colors.tealAccent,
-                  padding: const EdgeInsets.fromLTRB(10.0, 6.0, 0.0, 1.0),
-                  alignment: Alignment.topLeft,
-                  child: Text(_users[index].nome, style: TextStyle(color: Colors.white, fontSize: 20.0)),
-                ),
-                Container(
-                  //color: Colors.redAccent,
-                  padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 2.0),
-                  alignment: Alignment.topLeft,
-                  child: Text(_users[index].tipo, 
-                    style: TextStyle(color: Colors.grey[400], fontSize: 10.0)
-                  ),
-                ),
-                Container(
-                  //color: Colors.redAccent,
-                  padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 2.0),
-                  alignment: Alignment.topLeft,
-                  child: Text(_users[index].ultimaAposta, 
-                    style: TextStyle(color: Colors.grey, fontSize: 13.0)
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Container(
-                      //color: Colors.blueAccent,
-                      padding: EdgeInsets.fromLTRB(40.0,2.0,0.0,0.0),
-                      margin: EdgeInsets.only(bottom: 1.0),
-                      child: Icon(
-                        Icons.attach_money,
-                        size: 30.0,
-                        color: Colors.yellowAccent,
-                      ),
-                    ),
-                    Container(
-                      //color: Colors.cyanAccent,
-                      height: 22.0,
-                      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 2.0, 0.0),
-                      alignment: Alignment.topLeft,
-                      child: Text(_users[index].saldo, style: TextStyle(color: Colors.yellowAccent, fontSize: 20.0)),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Container(
-                      //color: Colors.blueAccent,
-                      padding: EdgeInsets.fromLTRB(40.0,0.0,0.0,0.0),
-                      child: Icon(
-                        Icons.assessment,
-                        size: 30.0,
-                        color: Colors.greenAccent,
-                      ),
-                    ),
-                    Container(
-                      //color: Colors.cyanAccent,
-                      padding: const EdgeInsets.fromLTRB(2.0, 2.0, 0.0, 2.0),
-                      alignment: Alignment.topLeft,
-                      child: Text(_users[index].qtd, style: TextStyle(color: Colors.greenAccent, fontSize: 20.0)),
-                    ),
-                  ],
-                ),
-              ],
-            )
-          ),  
-        ],
-      ),
-    ),
-  );
-}
-
-// construtor da lista de extrações
-Widget builderItemExtracao(context, index){
-  return Padding(
-    padding: EdgeInsets.all(5.0),
-    child: Container(
-      height: 155.0,
-      decoration: myBoxDecoration(),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  //color: Colors.tealAccent,
-                  padding: const EdgeInsets.fromLTRB(10.0, 6.0, 0.0, 1.0),
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    _extracoes[index].dia.toString()+"/"
-                    +_extracoes[index].mes.toString()+"/"
-                    +_extracoes[index].ano.toString(),
-                    style: TextStyle(color: Colors.white, fontSize: 20.0)),
-                ),
-                Container(
-                  //color: Colors.redAccent,
-                  padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 2.0),
-                  alignment: Alignment.topLeft,
-                  child: Text("Manhã", 
-                    style: TextStyle(color: Colors.grey, fontSize: 13.0)
-                  ),
-                ),
-                Row(
-                  children: <Widget>[
-                    Container(
-                      //color: Colors.blueAccent,
-                      padding: EdgeInsets.fromLTRB(2.0,2.0,0.0,0.0),
-                      margin: EdgeInsets.only(bottom: 1.0),
-                      child: Icon(
-                        Icons.chevron_right,
-                        size: 22.0,
-                        color: Colors.yellowAccent,
-                      ),
-                    ),
-                    Container(
-                      //color: Colors.cyanAccent,
-                      height: 22.0,
-                      padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 0.0),
-                      alignment: Alignment.topLeft,
-                      child: Text("1 - "+_extracoes[index].num1+" 01 "+ "Aveztruz", style: TextStyle(color: Colors.white, fontSize: 15.0)),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Container(
-                      //color: Colors.blueAccent,
-                      padding: EdgeInsets.fromLTRB(2.0,2.0,0.0,0.0),
-                      margin: EdgeInsets.only(bottom: 1.0),
-                      child: Icon(
-                        Icons.chevron_right,
-                        size: 22.0,
-                        color: Colors.yellowAccent,
-                      ),
-                    ),
-                    Container(
-                      //color: Colors.cyanAccent,
-                      height: 22.0,
-                      padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 0.0),
-                      alignment: Alignment.topLeft,
-                      child: Text("2 - "+_extracoes[index].num1+" 01 "+ "Aveztruz", style: TextStyle(color: Colors.white, fontSize: 15.0)),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Container(
-                      //color: Colors.blueAccent,
-                      padding: EdgeInsets.fromLTRB(2.0,2.0,0.0,0.0),
-                      margin: EdgeInsets.only(bottom: 1.0),
-                      child: Icon(
-                        Icons.chevron_right,
-                        size: 22.0,
-                        color: Colors.yellowAccent,
-                      ),
-                    ),
-                    Container(
-                      //color: Colors.cyanAccent,
-                      height: 22.0,
-                      padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 0.0),
-                      alignment: Alignment.topLeft,
-                      child: Text("3 - "+_extracoes[index].num1+" 01 "+ "Aveztruz", style: TextStyle(color: Colors.white, fontSize: 15.0)),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Container(
-                      //color: Colors.blueAccent,
-                      padding: EdgeInsets.fromLTRB(2.0,2.0,0.0,0.0),
-                      margin: EdgeInsets.only(bottom: 1.0),
-                      child: Icon(
-                        Icons.chevron_right,
-                        size: 22.0,
-                        color: Colors.yellowAccent,
-                      ),
-                    ),
-                    Container(
-                      //color: Colors.cyanAccent,
-                      height: 22.0,
-                      padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 0.0),
-                      alignment: Alignment.topLeft,
-                      child: Text("4 - "+_extracoes[index].num1+" 01 "+ "Aveztruz", style: TextStyle(color: Colors.white, fontSize: 15.0)),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Container(
-                      //color: Colors.blueAccent,
-                      padding: EdgeInsets.fromLTRB(2.0,2.0,0.0,0.0),
-                      margin: EdgeInsets.only(bottom: 1.0),
-                      child: Icon(
-                        Icons.chevron_right,
-                        size: 22.0,
-                        color: Colors.yellowAccent,
-                      ),
-                    ),
-                    Container(
-                      //color: Colors.cyanAccent,
-                      height: 22.0,
-                      padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 0.0),
-                      alignment: Alignment.topLeft,
-                      child: Text("5 - "+_extracoes[index].num1+" 01 "+ "Aveztruz", style: TextStyle(color: Colors.white, fontSize: 15.0)),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Container(
-                      //color: Colors.blueAccent,
-                      padding: EdgeInsets.fromLTRB(2.0,2.0,0.0,0.0),
-                      margin: EdgeInsets.only(bottom: 1.0),
-                      child: Icon(
-                        Icons.chevron_right,
-                        size: 22.0,
-                        color: Colors.yellowAccent,
-                      ),
-                    ),
-                    Container(
-                      //color: Colors.cyanAccent,
-                      height: 22.0,
-                      padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 0.0),
-                      alignment: Alignment.topLeft,
-                      child: Text("6 - "+_extracoes[index].num1+" 01 "+ "Aveztruz", style: TextStyle(color: Colors.white, fontSize: 15.0)),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Container(
-                      //color: Colors.blueAccent,
-                      padding: EdgeInsets.fromLTRB(2.0,2.0,0.0,0.0),
-                      margin: EdgeInsets.only(bottom: 1.0),
-                      child: Icon(
-                        Icons.chevron_right,
-                        size: 22.0,
-                        color: Colors.yellowAccent,
-                      ),
-                    ),
-                    Container(
-                      //color: Colors.cyanAccent,
-                      height: 22.0,
-                      padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 0.0),
-                      alignment: Alignment.topLeft,
-                      child: Text("7 - "+_extracoes[index].num1+" 01 "+ "Aveztruz", style: TextStyle(color: Colors.white, fontSize: 15.0)),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Container(
-                      //color: Colors.blueAccent,
-                      padding: EdgeInsets.fromLTRB(2.0,2.0,0.0,0.0),
-                      margin: EdgeInsets.only(bottom: 1.0),
-                      child: Icon(
-                        Icons.chevron_right,
-                        size: 22.0,
-                        color: Colors.yellowAccent,
-                      ),
-                    ),
-                    Container(
-                      //color: Colors.cyanAccent,
-                      height: 22.0,
-                      padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 0.0),
-                      alignment: Alignment.topLeft,
-                      child: Text("8 - "+_extracoes[index].num1+" 01 "+ "Aveztruz", style: TextStyle(color: Colors.white, fontSize: 15.0)),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Container(
-                      //color: Colors.blueAccent,
-                      padding: EdgeInsets.fromLTRB(2.0,2.0,0.0,0.0),
-                      margin: EdgeInsets.only(bottom: 1.0),
-                      child: Icon(
-                        Icons.chevron_right,
-                        size: 22.0,
-                        color: Colors.yellowAccent,
-                      ),
-                    ),
-                    Container(
-                      //color: Colors.cyanAccent,
-                      height: 22.0,
-                      padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 0.0),
-                      alignment: Alignment.topLeft,
-                      child: Text("9 - "+_extracoes[index].num1+" 01 "+ "Aveztruz", style: TextStyle(color: Colors.white, fontSize: 15.0)),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Container(
-                      //color: Colors.blueAccent,
-                      padding: EdgeInsets.fromLTRB(2.0,2.0,0.0,0.0),
-                      margin: EdgeInsets.only(bottom: 1.0),
-                      child: Icon(
-                        Icons.chevron_right,
-                        size: 22.0,
-                        color: Colors.yellowAccent,
-                      ),
-                    ),
-                    Container(
-                      //color: Colors.cyanAccent,
-                      height: 22.0,
-                      padding: const EdgeInsets.fromLTRB(0.0, 3.0, 2.0, 0.0),
-                      alignment: Alignment.topLeft,
-                      child: Text("10 - "+_extracoes[index].num1+" 01 "+ "Gato", style: TextStyle(color: Colors.white, fontSize: 15.0)),
-                    ),
-                  ],
-                ),
-              ],
-            )
-          ),  
-        ],
-      ),
-    ),
   );
 }
