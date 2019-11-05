@@ -131,9 +131,7 @@ class _appAdmState extends State<AppAdm> {
   void initState() {
     super.initState();
 
-    _getUser().then((map){
-      print(map);
-    });
+    _getUser();
   }
 
   int currentIndex = 0;
@@ -141,7 +139,8 @@ class _appAdmState extends State<AppAdm> {
 
   Future<Map> _getUser() async {
     http.Response response;
-    response = await http.get("http://localhost:3000/users/allUsers/1");
+    response = await http.get("https://back-end-jogodobicho.herokuapp.com/users/allUsers/1");
+    print(json.decode(response.body));
     return json.decode(response.body);
   }
 
@@ -167,9 +166,12 @@ class _appAdmState extends State<AppAdm> {
         title: Text('Usuários'),
       ),
       backgroundColor: Colors.grey[900],
-      body: ListView.builder(
-        itemCount: _tipos[currentIndex]['len'],
-        itemBuilder: _tipos[currentIndex]['builder'],
+      body: RefreshIndicator(
+        child: ListView.builder(
+          itemCount: _tipos[currentIndex]['len'],
+          itemBuilder: _tipos[currentIndex]['builder'],
+        ),
+        onRefresh: _getUser,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,

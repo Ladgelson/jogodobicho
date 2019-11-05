@@ -1,17 +1,18 @@
-require('dotenv').config();
-
 const express = require('express');
 const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
+
+require('dotenv').config();
 
 mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true });
+console.log(process.env.DATABASE_URL)
 const db = mongoose.connection;
 db.on('error', (err) => console.error(err));
 db.once('open',()=>console.log('Connected to Database'));
 
-app.use(cors());
+app.use(express.json(cors()));
 
 const indexRouter = require('./routes/indexRoute');
 app.use('/',indexRouter);
