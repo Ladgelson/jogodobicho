@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
 import 'package:jogo_do_bicho/components/bottomNavBar.dart';
 import 'package:jogo_do_bicho/domain/users.dart';
 import 'package:jogo_do_bicho/domain/extracoes.dart';
@@ -124,8 +127,23 @@ var _tipos = [
 
 class _appAdmState extends State<AppAdm> {
 
+  @override
+  void initState() {
+    super.initState();
+
+    _getUser().then((map){
+      print(map);
+    });
+  }
+
   int currentIndex = 0;
   int _counter = 0;
+
+  Future<Map> _getUser() async {
+    http.Response response;
+    response = await http.get("http://localhost:3000/users/allUsers/1");
+    return json.decode(response.body);
+  }
 
   void _incrementCounter() {
     users.add(UserItem(
@@ -135,7 +153,7 @@ class _appAdmState extends State<AppAdm> {
       saldo: "10.0",
       qtd: "2"
     ));
-    print(users);
+    //print(users);
     setState(() {
       users;
       _tipos[currentIndex]['len'] = users.length;
@@ -172,7 +190,7 @@ class _appAdmState extends State<AppAdm> {
               activeColor: Colors.white
           ),
           BottomNavyBarItem(
-            icon: Icon(Icons.beenhere),
+            icon: Icon(Icons.dehaze),
             title: Text('Extracoes'),
             activeColor: Colors.white,
           ),
