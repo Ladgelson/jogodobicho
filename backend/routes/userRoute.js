@@ -15,9 +15,18 @@ router.get('/allUsers/:page', async (req, res) => {
     const resPerPage = 9; // results per page
     const page = req.params.page || 1; // Page
     try {
-        const usersFound = await User.find()
+        let usersFound = await User.find()
             .skip((resPerPage * page)-resPerPage)
-            .limit(resPerPage);
+            .limit(resPerPage)
+
+        usersFound = usersFound.map((item)=> {
+            return {
+                nome: item.nome,
+                tipo: item.tipo,
+                saldo: item.saldo
+            }
+        })
+        //console.log(usersFound)
         const numOfUsers = await User.countDocuments();
                                 
         const usersDTO = {

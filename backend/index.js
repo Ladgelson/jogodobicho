@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
@@ -10,7 +11,7 @@ const db = mongoose.connection;
 db.on('error', (err) => console.error(err));
 db.once('open',()=>console.log('Connected to Database'));
 
-app.use(express.json());
+app.use(cors());
 
 const indexRouter = require('./routes/indexRoute');
 app.use('/',indexRouter);
